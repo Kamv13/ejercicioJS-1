@@ -1,7 +1,12 @@
 function Calcular() {
-  let NumberA = parseFloat(document.getElementById("valorA").value);
-  let NumberB = parseFloat(document.getElementById("valorB").value);
-  let NumberC = parseFloat(document.getElementById("valorC").value);
+  let NumberA, NumberB, NumberC;
+    try {
+      NumberA = _getRequiredIntValueById("valorA");
+      NumberB = _getRequiredIntValueById("valorB");
+      NumberC = _getRequiredIntValueById("valorC");
+    } catch (error) {
+        alert(error.toString())
+    }
 
   if (NumberA !== 0 && NumberB ** 2 - 4 * NumberA * NumberC >= 0) {
     let inputX1 =
@@ -19,8 +24,22 @@ function Calcular() {
     } else {
       let discriminante = NumberB ** 2 - 4 * NumberA * NumberC;
       if (NumberB ** 2 - 4 * NumberA * NumberC < 0) {
-        alert(`El discriminante no puede ser negativo: ${discriminante}`);
+        alert(`La ecuacion no tiene solucion en numeros reales, el discriminante es: ${discriminante}`);
       }
     }
   }
+}
+
+function Limpiar() {
+  let inputs = document.querySelectorAll("input");
+    inputs.forEach(input => input.value = "");
+}
+
+function _getRequiredIntValueById(id) {
+  const value = document.getElementById(id).value;
+  if (!value) {
+      throw new Error("Campo requerido vacio: " + id);
+  }
+
+  return parseFloat(value);
 }
