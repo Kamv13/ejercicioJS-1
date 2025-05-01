@@ -20,11 +20,19 @@ function Calcular() {
     document.getElementById("valorX2").value = inputX2.toFixed(2);
   } else {
     if (NumberA == 0) {
-      alert("El numero A no puede ser 0");
+      Swal.fire({
+        title: "El numero A no puede ser cero",
+        icon: "error",
+        draggable: true
+      });
     } else {
       let discriminante = NumberB ** 2 - 4 * NumberA * NumberC;
       if (NumberB ** 2 - 4 * NumberA * NumberC < 0) {
-        alert(`La ecuacion no tiene solucion en numeros reales, el discriminante es: ${discriminante}`);
+        Swal.fire({
+          title: (`La ecuacion no tiene solucion en numeros reales, el discriminante es: ${discriminante}`),
+          icon: "error",
+          draggable: true
+        });
       }
     }
   }
